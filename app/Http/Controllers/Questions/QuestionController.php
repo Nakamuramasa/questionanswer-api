@@ -7,9 +7,23 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\QuestionResource;
+use App\Repositories\Contracts\IQuestion;
 
 class QuestionController extends Controller
 {
+    protected $questions;
+
+    public function __construct(IQuestion $questions)
+    {
+        $this->questions = $questions;
+    }
+
+    public function index()
+    {
+        $questions = $this->questions->all();
+        return QuestionResource::collection($questions);
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, [

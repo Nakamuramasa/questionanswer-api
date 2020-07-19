@@ -2,6 +2,9 @@
 
 Route::get('me', 'User\MeController@getMe');
 
+Route::get('questions', 'Questions\QuestionController@index');
+Route::get('users', 'User\UserController@index');
+
 Route::group(['middleware' => ['auth:api']], function(){
     Route::post('logout', 'Auth\LoginController@logout');
     Route::put('settings/password', 'User\SettingsController@updatePassword');
