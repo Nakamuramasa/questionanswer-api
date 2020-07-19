@@ -3,6 +3,8 @@
 Route::get('me', 'User\MeController@getMe');
 
 Route::get('questions', 'Questions\QuestionController@index');
+Route::get('questions/{id}', 'Questions\QuestionController@findQuestion');
+
 Route::get('users', 'User\UserController@index');
 
 Route::group(['middleware' => ['auth:api']], function(){

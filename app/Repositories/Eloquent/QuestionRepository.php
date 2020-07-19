@@ -12,4 +12,10 @@ class QuestionRepository extends BaseRepository implements IQuestion
     {
         return Question::class;
     }
+
+    public function applyTags($id, array $data)
+    {
+        $question = $this->find($id);
+        $question->retag($data);
+    }
 }

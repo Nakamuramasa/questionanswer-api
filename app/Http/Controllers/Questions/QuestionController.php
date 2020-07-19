@@ -24,6 +24,12 @@ class QuestionController extends Controller
         return QuestionResource::collection($questions);
     }
 
+    public function findQuestion($id)
+    {
+        $question = $this->questions->find($id);
+        return new QuestionResource($question);
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -34,7 +40,8 @@ class QuestionController extends Controller
 
         $slug = Str::slug($request->title);
 
-        $question = auth()->user()->questions()->create([
+        $question = $this->questions->create([
+            'user_id' => auth()->id(),
             'title' => $request->title,
             'slug' => $slug,
             'body' => $request->body
@@ -47,7 +54,7 @@ class QuestionController extends Controller
 
     public function update(Request $request, $id)
     {
-        $question = Question::findOrFail($id);
+        $question = $this->questions->find($id);
         $this->authorize('update', $question);
 
         $this->validate($request, [
@@ -58,22 +65,22 @@ class QuestionController extends Controller
 
         $slug = Str::slug($request->title);
 
-        $question->update([
+        $question = $this->questions->update($id, [
             'title' => $request->title,
             'slug' => $slug,
             'body' => $request->body
         ]);
 
-        $question->retag($request->tags);
+        $this->questions->applyTags($id, $request->tags);
 
         return new QuestionResource($question);
     }
 
     public function destroy($id)
     {
-        $question = Question::findOrFail($id);
+        $question = $this->questions->find($id);
         $this->authorize('delete', $question);
-        $question->delete();
+        $this->questions->delete();
 
         return response()->json(['message' => 'Record deleted'], 200);
     }
