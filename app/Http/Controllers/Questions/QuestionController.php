@@ -80,7 +80,7 @@ class QuestionController extends Controller
     {
         $question = $this->questions->find($id);
         $this->authorize('delete', $question);
-        $this->questions->delete();
+        $this->questions->delete($id);
 
         return response()->json(['message' => 'Record deleted'], 200);
     }
