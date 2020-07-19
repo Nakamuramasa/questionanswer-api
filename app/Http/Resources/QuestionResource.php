@@ -16,7 +16,6 @@ class QuestionResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user' => new UserResource($this->user),
             'title' => $this->title,
             'slug' => $this->slug,
             'body' => $this->body,
@@ -31,7 +30,8 @@ class QuestionResource extends JsonResource
             'updated_at_dates' => [
                 'updated_at_human' => $this->updated_at->diffForHumans(),
                 'updated_at' => $this->updated_at
-            ]
+            ],
+            'user' => new UserResource($this->user)
         ];
     }
 }

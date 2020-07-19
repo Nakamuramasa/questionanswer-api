@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\QuestionResource;
 use App\Repositories\Contracts\IQuestion;
+use App\Repositories\Eloquent\Criteria\{
+    LatestFirst,
+    ForUser
+};
 
 class QuestionController extends Controller
 {
@@ -20,7 +24,10 @@ class QuestionController extends Controller
 
     public function index()
     {
-        $questions = $this->questions->all();
+        $questions = $this->questions->withCriteria([
+            new LatestFirst,
+            // new ForUser(1)
+        ])->all();
         return QuestionResource::collection($questions);
     }
 
