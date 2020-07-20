@@ -27,9 +27,9 @@ class ProfileJsonResponse
             // $response->setData(array_merge($response->getData(true), [
             //     '_debugbar' => app('debugbar')->getData()
             // ]));
-            $response->setData(array_merge($response->getData(true), [
+            $response->setData(array_merge([
                 '_debugbar' => Arr::only(app('debugbar')->getData(), 'queries')
-            ]));
+            ], $response->getData(true)));
         }
 
         return $response;
