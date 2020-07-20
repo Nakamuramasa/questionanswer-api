@@ -10,7 +10,8 @@ use App\Http\Resources\QuestionResource;
 use App\Repositories\Contracts\IQuestion;
 use App\Repositories\Eloquent\Criteria\{
     LatestFirst,
-    ForUser
+    ForUser,
+    EagerLoad
 };
 
 class QuestionController extends Controller
@@ -26,7 +27,8 @@ class QuestionController extends Controller
     {
         $questions = $this->questions->withCriteria([
             new LatestFirst,
-            // new ForUser(1)
+            // new ForUser(1),
+            new EagerLoad(['user', 'replies'])
         ])->all();
         return QuestionResource::collection($questions);
     }

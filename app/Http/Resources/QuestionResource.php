@@ -19,6 +19,7 @@ class QuestionResource extends JsonResource
             'title' => $this->title,
             'slug' => $this->slug,
             'body' => $this->body,
+            'likes_count' => $this->likes()->count(),
             'tag_list' => [
                 'tags' => $this->tagArray,
                 'normalized' => $this->tagArrayNormalized
@@ -31,8 +32,9 @@ class QuestionResource extends JsonResource
                 'updated_at_human' => $this->updated_at->diffForHumans(),
                 'updated_at' => $this->updated_at
             ],
-            'replies' => ReplyResource::collection($this->replies),
-            'user' => new UserResource($this->user)
+            'replies' => ReplyResource::collection(
+                            $this->whenLoaded('replies')),
+            'user' => new UserResource($this->whenLoaded('user'))
         ];
     }
 }
