@@ -14,6 +14,10 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::post('questions', 'Questions\QuestionController@store');
     Route::put('questions/{id}', 'Questions\QuestionController@update');
     Route::delete('questions/{id}', 'Questions\QuestionController@destroy');
+
+    Route::post('questions/{id}/replies', 'Questions\ReplyController@store');
+    Route::put('replies/{id}', 'Questions\ReplyController@update');
+    Route::delete('replies/{id}', 'Questions\ReplyController@destroy');
 });
 
 Route::group(['middleware' => ['guest:api']], function(){

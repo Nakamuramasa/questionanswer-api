@@ -18,4 +18,12 @@ class QuestionRepository extends BaseRepository implements IQuestion
         $question = $this->find($id);
         $question->retag($data);
     }
+
+    public function addReply($questionId, array $data)
+    {
+        $question = $this->find($questionId);
+        $reply = $question->replies()->create($data);
+
+        return $reply;
+    }
 }

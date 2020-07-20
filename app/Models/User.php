@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Comment;
 use App\Models\Question;
 use App\Notifications\VerifyEmail;
 use App\Notifications\ResetPassword;
@@ -19,9 +20,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password', 'username'
-    ];
+    protected $fillable = ['name', 'email', 'password', 'username'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -54,6 +53,11 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     public function questions()
     {
         return $this->hasMany(Question::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     /**
