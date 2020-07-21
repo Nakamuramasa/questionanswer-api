@@ -105,4 +105,16 @@ class QuestionController extends Controller
         $isLiked = $this->questions->isLikedByUser($questionId);
         return response()->json(['liked' => $isLiked], 200);
     }
+
+    public function findBySlug($slug)
+    {
+        $question = $this->questions->findWhereFirst('slug', $slug);
+        return new QuestionResource($question);
+    }
+
+    public function getForUser($userId)
+    {
+        $questions = $this->questions->findWhere('user_id', $userId);
+        return QuestionResource::collection($questions);
+    }
 }

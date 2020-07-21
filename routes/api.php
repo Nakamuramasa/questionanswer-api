@@ -4,8 +4,11 @@ Route::get('me', 'User\MeController@getMe');
 
 Route::get('questions', 'Questions\QuestionController@index');
 Route::get('questions/{id}', 'Questions\QuestionController@findQuestion');
+Route::get('questions/slug/{slug}', 'Questions\QuestionController@findBySlug');
 
 Route::get('users', 'User\UserController@index');
+Route::get('user/{username}', 'User\UserController@findByUsername');
+Route::get('users/{id}/questions', 'Questions\QuestionController@getForUser');
 
 Route::group(['middleware' => ['auth:api']], function(){
     Route::post('logout', 'Auth\LoginController@logout');
