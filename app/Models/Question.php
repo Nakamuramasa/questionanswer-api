@@ -19,7 +19,6 @@ class Question extends Model
 
     public function replies()
     {
-        return $this->morphMany(Reply::class, 'repliable')
-                ->orderBy('created_at', 'asc');
+        return $this->morphMany(Reply::class, 'repliable')->orderBy('created_at', 'asc');
     }
 }

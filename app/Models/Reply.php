@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Likeable;
 use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
+    use Likeable;
+
     protected $fillable = ['body', 'user_id'];
 
     public function repliable()

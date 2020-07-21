@@ -18,6 +18,9 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::post('questions/{id}/replies', 'Questions\ReplyController@store');
     Route::put('replies/{id}', 'Questions\ReplyController@update');
     Route::delete('replies/{id}', 'Questions\ReplyController@destroy');
+
+    Route::post('questions/{id}/like', 'Questions\QuestionController@like');
+    Route::get('questions/{id}/liked', 'Questions\QuestionController@checkIfUserHasLiked');
 });
 
 Route::group(['middleware' => ['guest:api']], function(){
