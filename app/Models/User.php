@@ -22,6 +22,13 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      */
     protected $fillable = ['name', 'email', 'password', 'username'];
 
+    protected $appends = ['photo_url'];
+
+    public function getPhotoUrlAttribute()
+    {
+        return 'https://www.gravatar.com/avatar/'.md5(strtolower($this->email)).'.jpg?s=200&d=mm';
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

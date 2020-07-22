@@ -18,8 +18,13 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'username' => $this->username,
             'name' => $this->name,
-            'email' => $this->email,
-            'questions' => $this->questions,
+            'photo_url' => $this->photo_url,
+            $this->mergeWhen(auth()->check() && auth()->id() == $this->id, [
+                'email' => $this->email,
+            ]),
+            'questions' => QuestionResource::collection(
+                $this->whenLoaded('questions')
+            ),
             'create_date' => [
                 'created_at_human' => $this->created_at->diffForHumans(),
                 'created_at' => $this->created_at
