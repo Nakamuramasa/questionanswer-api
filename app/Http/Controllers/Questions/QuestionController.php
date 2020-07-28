@@ -117,4 +117,13 @@ class QuestionController extends Controller
         $questions = $this->questions->findWhere('user_id', $userId);
         return QuestionResource::collection($questions);
     }
+
+    public function userOwnsQuestion($id)
+    {
+        $question = $this->questions->withCriteria([
+            new ForUser(auth()->id())
+        ])->findWhereFirst('id', $id);
+
+        return new QuestionResource($question);
+    }
 }

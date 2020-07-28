@@ -16,6 +16,7 @@ Route::group(['middleware' => ['auth:api']], function(){
 
     Route::post('questions', 'Questions\QuestionController@store');
     Route::put('questions/{id}', 'Questions\QuestionController@update');
+    Route::get('questions/{id}/byUser', 'Questions\QuestionController@userOwnsQuestion');
     Route::delete('questions/{id}', 'Questions\QuestionController@destroy');
 
     Route::post('questions/{id}/replies', 'Questions\ReplyController@store');
