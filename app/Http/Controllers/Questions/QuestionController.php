@@ -108,7 +108,7 @@ class QuestionController extends Controller
 
     public function findBySlug($slug)
     {
-        $question = $this->questions->findWhereFirst('slug', $slug);
+        $question = $this->questions->withCriteria([new EagerLoad(['user', 'replies'])])->findWhereFirst('slug', $slug);
         return new QuestionResource($question);
     }
 
