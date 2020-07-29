@@ -32,6 +32,7 @@ class QuestionResource extends JsonResource
                 'updated_at_human' => $this->updated_at->diffForHumans(),
                 'updated_at' => $this->updated_at
             ],
+            'replies_count' => $this->replies()->count(),
             'replies' => ReplyResource::collection(
                             $this->whenLoaded('replies')),
             'user' => new UserResource($this->whenLoaded('user'))
