@@ -35,6 +35,8 @@ class QuestionRepository extends BaseRepository implements IQuestion
         }else{
             $question->like();
         }
+
+        return $question->likes()->count();
     }
 
     public function isLikedByUser($id)

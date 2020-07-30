@@ -96,8 +96,11 @@ class QuestionController extends Controller
 
     public function like($id)
     {
-        $this->questions->like($id);
-        return response()->json(['message' => 'Successful'], 200);
+        $total = $this->questions->like($id);
+        return response()->json([
+            'message' => 'Successful',
+            'total' => $total
+        ], 200);
     }
 
     public function checkIfUserHasLiked($questionId)
