@@ -94,21 +94,6 @@ class QuestionController extends Controller
         return response()->json(['message' => 'Record deleted'], 200);
     }
 
-    public function like($id)
-    {
-        $total = $this->questions->like($id);
-        return response()->json([
-            'message' => 'Successful',
-            'total' => $total
-        ], 200);
-    }
-
-    public function checkIfUserHasLiked($questionId)
-    {
-        $isLiked = $this->questions->isLikedByUser($questionId);
-        return response()->json(['liked' => $isLiked], 200);
-    }
-
     public function findBySlug($slug)
     {
         $question = $this->questions->withCriteria([new EagerLoad(['user', 'replies'])])->findWhereFirst('slug', $slug);

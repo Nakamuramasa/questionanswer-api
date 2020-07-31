@@ -58,4 +58,18 @@ class ReplyController extends Controller
 
         return response()->json(['message' => 'Reply deleted'], 200);
     }
+
+    public function like($id){
+        $total = $this->replies->like($id);
+        return response()->json([
+            'message' => 'Successful',
+            'total' => $total
+        ], 200);
+    }
+
+    public function checkIfUserHasLiked($replyId)
+    {
+        $isLiked = $this->replies->isLikedByUser($replyId);
+        return response()->json(['liked' => $isLiked], 200);
+    }
 }

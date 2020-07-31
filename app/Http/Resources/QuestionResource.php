@@ -19,7 +19,6 @@ class QuestionResource extends JsonResource
             'title' => $this->title,
             'slug' => $this->slug,
             'body' => $this->body,
-            'likes_count' => $this->likes()->count(),
             'tag_list' => [
                 'tags' => $this->tagArray,
                 'normalized' => $this->tagArrayNormalized

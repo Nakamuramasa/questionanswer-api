@@ -26,22 +26,4 @@ class QuestionRepository extends BaseRepository implements IQuestion
 
         return $reply;
     }
-
-    public function like($id)
-    {
-        $question = $this->model->findOrFail($id);
-        if($question->isLikedByUser(auth()->id())){
-            $question->unlike();
-        }else{
-            $question->like();
-        }
-
-        return $question->likes()->count();
-    }
-
-    public function isLikedByUser($id)
-    {
-        $question = $this->model->findOrFail($id);
-        return $question->isLikedByUser(auth()->id());
-    }
 }

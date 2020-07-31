@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\Traits\Likeable;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentTaggable\Taggable;
 
 class Question extends Model
 {
-    use Taggable, Likeable;
+    use Taggable;
 
     protected $fillable = ['user_id', 'title', 'slug', 'body'];
 

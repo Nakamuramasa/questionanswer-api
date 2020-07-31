@@ -12,4 +12,22 @@ class ReplyRepository extends BaseRepository implements IReply
     {
         return Reply::class;
     }
+
+    public function like($id)
+    {
+        $reply = $this->model->findOrFail($id);
+        if($reply->isLikedByUser(auth()->id())){
+            $reply->unlike();
+        }else{
+            $reply->like();
+        }
+
+        return $reply->likes()->count();
+    }
+
+    public function isLikedByUser($id)
+    {
+        $reply = $this->model->findOrFail($id);
+        return $reply->isLikedByUser(auth()->id());
+    }
 }

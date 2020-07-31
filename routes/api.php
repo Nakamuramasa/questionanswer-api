@@ -23,8 +23,8 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::put('replies/{id}', 'Questions\ReplyController@update');
     Route::delete('replies/{id}', 'Questions\ReplyController@destroy');
 
-    Route::post('questions/{id}/like', 'Questions\QuestionController@like');
-    Route::get('questions/{id}/liked', 'Questions\QuestionController@checkIfUserHasLiked');
+    Route::post('replies/{id}/like', 'Questions\ReplyController@like');
+    Route::get('replies/{id}/liked', 'Questions\ReplyController@checkIfUserHasLiked');
 });
 
 Route::group(['middleware' => ['guest:api']], function(){
